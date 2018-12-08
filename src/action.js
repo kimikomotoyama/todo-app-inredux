@@ -11,3 +11,10 @@ export function complete(taskName) {
     taskName
   }
 }
+
+export function undo(taskName) {
+  return {
+    type: "UNDO",
+    taskName
+  }
+}

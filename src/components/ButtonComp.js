@@ -5,7 +5,7 @@ import "../styles/ButtonComp.css";
 export default class ButtonComp extends Component {
   render() {
     return (
-      <Button className={`${this.props.className} button`} bsStyle="primary">
+      <Button className={`${this.props.className} button`} bsStyle={this.props.buttonType} onClick={this.props.onClick}>
         {this.props.buttonName}
       </Button>
     );

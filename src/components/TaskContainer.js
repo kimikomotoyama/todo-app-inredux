@@ -10,9 +10,13 @@ class TaskContainer extends Component {
   render() {
     return (
       <div className="task-container">
-        <ButtonComp className="add-task-button" buttonName="Add Task" />
+        <h1>Todo app</h1>
+        <ButtonComp className="add-task-button" buttonName="Add Task" buttonType="primary" />
+        <ButtonComp className="add-task-button" buttonName="Show All" />
+        <ButtonComp className="add-task-button" buttonName="Show Completed" />
+        <ButtonComp className="add-task-button" buttonName="Show Incompleted" />
         <ListGroup>
-          {this.props.tasks.map((task, index) => {
+          {this.props.tasks && this.props.tasks.map((task, index) => {
             return <Task key={index} task={task} />
           })}
         </ListGroup>
@@ -36,7 +40,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       dispatch(complete(taskName))
     }
   }
-} 
+}
 
 const task = connect(
   mapStateToProps,
