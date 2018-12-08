@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
 import { ListGroup } from "react-bootstrap";
+import * as Constants from "../constants";
 import { addTodo, complete, showAll, showCompleted, showIncomplete } from "../action";
 import Task from "./Task";
-import "../styles/TaskContainer.css";
 import ButtonComp from "./ButtonComp";
+import "../styles/TaskContainer.css";
 
 class TaskContainer extends Component {
   render() {
@@ -22,18 +23,43 @@ class TaskContainer extends Component {
         <ButtonComp className="add-task-button" buttonName="Show Completed" onClick={this.props.showCompleted} />
         <ButtonComp className="add-task-button" buttonName="Show Incomplete" onClick={this.props.showIncomplete} />
         <ListGroup>
-          {this.props.tasks && this.props.tasks.map((task, index) => {
-            return <Task key={index} task={task} />
-          })}
+          {this.renderComponent()}
         </ListGroup>
       </div>
     );
+  }
+
+  renderComponent() {
+    if (this.props.showStatus === Constants.SHOW_ALL) {
+      return (<ListGroup>
+        {this.props.tasks && this.props.tasks.map((task, index) => {
+          return <Task key={index} task={task} />
+        })}
+      </ListGroup>);
+    } else if (this.props.showStatus === Constants.SHOW_COMPLETED) {
+      return (<ListGroup>
+        {this.props.tasks && this.props.tasks.filter((task, index) => task.isComplete)
+          .map((task, index) => {
+            return <Task key={index} task={task} />
+          })
+        }
+      </ListGroup>);
+    } else {
+      return (<ListGroup>
+        {this.props.tasks && this.props.tasks.filter((task, index) => !task.isComplete)
+          .map((task, index) => {
+            return <Task key={index} task={task} />
+          })
+        }
+      </ListGroup>);
+    }
   }
 }
 
 const mapStateToProps = (state, ownProps) => {
   return {
     tasks: state.tasks,
+    showStatus: state.showStatus,
   }
 }
 

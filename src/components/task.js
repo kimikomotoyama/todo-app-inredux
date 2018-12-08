@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { ListGroupItem } from "react-bootstrap";
-import { addTodo, complete, undo } from "../action";
+import { complete, undo } from "../action";
 import ButtonComp from "./ButtonComp";
 import "../styles/Task.css";
 
