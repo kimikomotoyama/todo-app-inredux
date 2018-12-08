@@ -8,8 +8,7 @@ const initialState = {
 export const todoReducer = (state = initialState, action) => {
   switch (action.type) {
     case "ADD": {
-      const newState = { ...state };
-      newState.tasks.push({ taskName: action.taskName, isComplete: false });
+      return { ...state, tasks: [...state.tasks, { taskName: action.taskName, isComplete: false }] };
     }
     case "COMPLETE": {
       console.log(state)

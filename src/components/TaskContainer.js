@@ -11,7 +11,13 @@ class TaskContainer extends Component {
     return (
       <div className="task-container">
         <h1>Todo app</h1>
-        <ButtonComp className="add-task-button" buttonName="Add Task" buttonType="primary" />
+        <form onSubmit={e => {
+          e.preventDefault();
+          this.props.addToDo(e.target.querySelector('input').value)
+        }}>
+          <input placeholder="Add task" />
+          <input type="submit" value="Add Task" />
+        </form>
         <ButtonComp className="add-task-button" buttonName="Show All" />
         <ButtonComp className="add-task-button" buttonName="Show Completed" />
         <ButtonComp className="add-task-button" buttonName="Show Incompleted" />
