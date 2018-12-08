@@ -10,7 +10,6 @@ export const todoReducer = (state = initialState, action) => {
     case "ADD": {
       const newState = { ...state };
       newState.tasks.push({ taskName: action.taskName, isComplete: false });
-      return newState;
     }
     case "COMPLETE": {
       console.log(state)
