@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
 import { ListGroup } from "react-bootstrap";
-import { addTodo, complete } from "../action";
+import { addTodo, complete, showAll, showCompleted, showIncomplete } from "../action";
 import Task from "./Task";
 import "../styles/TaskContainer.css";
 import ButtonComp from "./ButtonComp";
@@ -18,9 +18,9 @@ class TaskContainer extends Component {
           <input placeholder="Add task" />
           <input type="submit" value="Add Task" />
         </form>
-        <ButtonComp className="add-task-button" buttonName="Show All" />
-        <ButtonComp className="add-task-button" buttonName="Show Completed" />
-        <ButtonComp className="add-task-button" buttonName="Show Incompleted" />
+        <ButtonComp className="add-task-button" buttonName="Show All" onClick={this.props.showAll} />
+        <ButtonComp className="add-task-button" buttonName="Show Completed" onClick={this.props.showCompleted} />
+        <ButtonComp className="add-task-button" buttonName="Show Incomplete" onClick={this.props.showIncomplete} />
         <ListGroup>
           {this.props.tasks && this.props.tasks.map((task, index) => {
             return <Task key={index} task={task} />
@@ -44,6 +44,15 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     },
     complete: taskName => {
       dispatch(complete(taskName))
+    },
+    showAll: () => {
+      dispatch(showAll())
+    },
+    showCompleted: () => {
+      dispatch(showCompleted())
+    },
+    showIncomplete: () => {
+      dispatch(showIncomplete())
     }
   }
 }
